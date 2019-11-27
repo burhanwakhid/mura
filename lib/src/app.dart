@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mura/src/screens/home/home.dart';
-import 'package:mura/src/splashscreen.dart';
+import 'package:Mura/src/screens/home/home.dart';
+import 'package:Mura/src/splashscreen.dart';
 
 class App extends StatelessWidget {
   final Map<String, WidgetBuilder> routes = {
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fagos',
+      title: 'Mura',
       theme: ThemeData(
         primaryColor: const Color(0xFF01579B),
         accentColor: Colors.red,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mura/src/app.dart';
+import 'package:Mura/src/app.dart';
 
 Future main() async{
   await SystemChrome.setPreferredOrientations(
