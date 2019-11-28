@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: routes,
-      home: Splashscreen(),
+      home: Home(),
     );
   }
 }
