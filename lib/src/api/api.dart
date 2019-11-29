@@ -20,6 +20,17 @@ class Api {
     }
   }
 
+  static Future getNewsByKategori(String kategori) async {
+    try {
+      var url = urlNewsApi + 'top-headlines?country=id&category=$kategori&apiKey=' + tokenNewsApi;
+      var response = await http.get(url);
+      print(response.body);
+      return NewsModel.fromJson(jsonDecode(response.body));
+    } catch(e) {
+      return e;
+    }
+  }
+
   static Future getPopularMovie() async{
     try {
       var url = urlMovie + 'movie/popular?api_key=$tokenMovies&language=en-US&page=1';

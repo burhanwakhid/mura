@@ -6,7 +6,6 @@ import 'package:Mura/src/screens/news/news_detail.dart';
 import 'package:Mura/src/utils/content_scroll.dart';
 import 'package:Mura/src/utils/headline_shimer.dart';
 import 'package:Mura/src/utils/oval_right.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -255,12 +254,10 @@ class _HomeState extends State<Home> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                            colors: [Colors.pink, Colors.deepPurple])),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: CachedNetworkImageProvider('https://www.pngarts.com/files/3/Cool-Avatar-Transparent-Images.png'),
-                    ),
+                        color: Colors.white),
+                    child: Image(
+                              image: AssetImage('assets/images/logo.png'),
+                            ),
                   ),
                   SizedBox(height: 5.0),
                   Text(
