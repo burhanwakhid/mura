@@ -1,6 +1,8 @@
 import 'package:Mura/src/api/api.dart';
 import 'package:Mura/src/model/movie_model.dart';
+import 'package:Mura/src/model/movies_model.dart';
 import 'package:Mura/src/model/news_model.dart';
+import 'package:Mura/src/screens/news/news_detail.dart';
 import 'package:Mura/src/utils/content_scroll.dart';
 import 'package:Mura/src/utils/headline_shimer.dart';
 import 'package:Mura/src/utils/oval_right.dart';
@@ -19,15 +21,21 @@ class _HomeState extends State<Home> {
   final Color active = Color(0xff6C48AB);
 
   NewsModel newsModel;
+  MovieModel movieModel;
 
   @override
   void initState() {
-    Api.getPopularMovies().then((value) {
+    Api.getTopHeadLines().then((value) {
       setState(() {
         newsModel = value;
-        // print(newsModel.articles.length);
+        print(newsModel.articles.length);
       });
     });
+    // Api.getPopularMovie().then((value){
+    //   setState(() {
+    //     movieModel = value;
+    //   });
+    // });
     super.initState();
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8);
   }
@@ -55,7 +63,11 @@ class _HomeState extends State<Home> {
         //     builder: (_) => MovieScreen(movie: movies[index]),
         //   ),
         // ),
-        onTap: (){},
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (_) => NewsDetail(title: newsModel.articles[index].title, url: newsModel.articles[index].url,)
+          ));
+        },
         child: Stack(
           children: <Widget>[
             Center(
@@ -133,16 +145,24 @@ class _HomeState extends State<Home> {
       ),
       body: ListView(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.0),
+            child: Text('Top Headlines Indonesia',
+              style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600,
+            ),),
+          ),
           Container(
             height: 280.0,
             width: double.infinity,
-            child: newsModel != null ?  PageView.builder(
+            child: newsModel != null ? newsModel.articles.length >0 ? PageView.builder(
               controller: _pageController,
               itemCount: newsModel.articles.length,
               itemBuilder: (BuildContext context, int index) {
                 return _newsSelector(index);
               },
-            ) : CardShimmer(),
+            ): Center(child: Text('artikel kosong'),) : CardShimmer(),
           ),
           Container(
             height: 90.0,

@@ -7,7 +7,7 @@ import 'package:Mura/src/utils/environment.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  // get top headlines news
+  // get top headlines
   static Future getTopHeadLines() async{
     try {
       var url = urlNewsApi + 'top-headlines?country=id&apiKey=' + tokenNewsApi;
@@ -19,17 +19,18 @@ class Api {
       return e;
     }
   }
-  
-  // get popular movies
-  static Future getPopularMovies() async {
+
+  static Future getPopularMovie() async{
     try {
       var url = urlMovie + 'movie/popular?api_key=$tokenMovies&language=en-US&page=1';
       var response = await http.get(url);
-      // print(response.body);
+      print(response.body);
       return MovieModel.fromJson(jsonDecode(response.body));
     } catch(e) {
+      print(e);
       return e;
     }
   }
+  
 
 }

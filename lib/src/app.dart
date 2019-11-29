@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Mura/src/screens/home/home.dart';
-import 'package:Mura/src/splashscreen.dart';
+// import 'package:Mura/src/splashscreen.dart';
 
 class App extends StatelessWidget {
   final Map<String, WidgetBuilder> routes = {

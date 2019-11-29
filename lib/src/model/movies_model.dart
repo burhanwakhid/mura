@@ -1,100 +1,126 @@
+// To parse this JSON data, do
+//
+//     final movieModel = movieModelFromJson(jsonString);
+
+import 'dart:convert';
+
+MovieModel movieModelFromJson(String str) => MovieModel.fromJson(json.decode(str));
+
+String movieModelToJson(MovieModel data) => json.encode(data.toJson());
+
 class MovieModel {
-  int page;
-  int totalResults;
-  int totalPages;
-  List<Results> results;
+    int page;
+    int totalResults;
+    int totalPages;
+    List<Result> results;
 
-  MovieModel({this.page, this.totalResults, this.totalPages, this.results});
+    MovieModel({
+        this.page,
+        this.totalResults,
+        this.totalPages,
+        this.results,
+    });
 
-  MovieModel.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
-    totalResults = json['total_results'];
-    totalPages = json['total_pages'];
-    if (json['results'] != null) {
-      results = new List<Results>();
-      json['results'].forEach((v) {
-        results.add(new Results.fromJson(v));
-      });
-    }
-  }
+    factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
+        page: json["page"],
+        totalResults: json["total_results"],
+        totalPages: json["total_pages"],
+        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    data['total_results'] = this.totalResults;
-    data['total_pages'] = this.totalPages;
-    if (this.results != null) {
-      data['results'] = this.results.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "page": page,
+        "total_results": totalResults,
+        "total_pages": totalPages,
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+    };
 }
 
-class Results {
-  double popularity;
-  int voteCount;
-  bool video;
-  String posterPath;
-  int id;
-  bool adult;
-  String backdropPath;
-  String originalLanguage;
-  String originalTitle;
-  List<int> genreIds;
-  String title;
-  double voteAverage;
-  String overview;
-  String releaseDate;
+class Result {
+    double popularity;
+    int voteCount;
+    bool video;
+    String posterPath;
+    int id;
+    bool adult;
+    String backdropPath;
+    OriginalLanguage originalLanguage;
+    String originalTitle;
+    List<int> genreIds;
+    String title;
+    double voteAverage;
+    String overview;
+    DateTime releaseDate;
 
-  Results(
-      {this.popularity,
-      this.voteCount,
-      this.video,
-      this.posterPath,
-      this.id,
-      this.adult,
-      this.backdropPath,
-      this.originalLanguage,
-      this.originalTitle,
-      this.genreIds,
-      this.title,
-      this.voteAverage,
-      this.overview,
-      this.releaseDate});
+    Result({
+        this.popularity,
+        this.voteCount,
+        this.video,
+        this.posterPath,
+        this.id,
+        this.adult,
+        this.backdropPath,
+        this.originalLanguage,
+        this.originalTitle,
+        this.genreIds,
+        this.title,
+        this.voteAverage,
+        this.overview,
+        this.releaseDate,
+    });
 
-  Results.fromJson(Map<String, dynamic> json) {
-    popularity = json['popularity'];
-    voteCount = json['vote_count'];
-    video = json['video'];
-    posterPath = json['poster_path'];
-    id = json['id'];
-    adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    originalLanguage = json['original_language'];
-    originalTitle = json['original_title'];
-    genreIds = json['genre_ids'].cast<int>();
-    title = json['title'];
-    voteAverage = json['vote_average'];
-    overview = json['overview'];
-    releaseDate = json['release_date'];
-  }
+    factory Result.fromJson(Map<String, dynamic> json) => Result(
+        popularity: json["popularity"].toDouble(),
+        voteCount: json["vote_count"],
+        video: json["video"],
+        posterPath: json["poster_path"],
+        id: json["id"],
+        adult: json["adult"],
+        backdropPath: json["backdrop_path"],
+        originalLanguage: originalLanguageValues.map[json["original_language"]],
+        originalTitle: json["original_title"],
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        title: json["title"],
+        voteAverage: json["vote_average"].toDouble(),
+        overview: json["overview"],
+        releaseDate: DateTime.parse(json["release_date"]),
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['popularity'] = this.popularity;
-    data['vote_count'] = this.voteCount;
-    data['video'] = this.video;
-    data['poster_path'] = this.posterPath;
-    data['id'] = this.id;
-    data['adult'] = this.adult;
-    data['backdrop_path'] = this.backdropPath;
-    data['original_language'] = this.originalLanguage;
-    data['original_title'] = this.originalTitle;
-    data['genre_ids'] = this.genreIds;
-    data['title'] = this.title;
-    data['vote_average'] = this.voteAverage;
-    data['overview'] = this.overview;
-    data['release_date'] = this.releaseDate;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "popularity": popularity,
+        "vote_count": voteCount,
+        "video": video,
+        "poster_path": posterPath,
+        "id": id,
+        "adult": adult,
+        "backdrop_path": backdropPath,
+        "original_language": originalLanguageValues.reverse[originalLanguage],
+        "original_title": originalTitle,
+        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "title": title,
+        "vote_average": voteAverage,
+        "overview": overview,
+        "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+    };
+}
+
+enum OriginalLanguage { EN, JA }
+
+final originalLanguageValues = EnumValues({
+    "en": OriginalLanguage.EN,
+    "ja": OriginalLanguage.JA
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        if (reverseMap == null) {
+            reverseMap = map.map((k, v) => new MapEntry(v, k));
+        }
+        return reverseMap;
+    }
 }
