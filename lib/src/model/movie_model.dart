@@ -69,8 +69,8 @@ final List<Movie> movies = [
 ];
 
 final List<String> labels = [
-  'Discover',
-  'Categories',
+  'Business',
+  'Health',
   'Specials',
   'New',
 ];

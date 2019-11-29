@@ -5,6 +5,7 @@ import 'package:Mura/src/model/news_model.dart';
 import 'package:Mura/src/screens/news/news_detail.dart';
 import 'package:Mura/src/utils/content_scroll.dart';
 import 'package:Mura/src/utils/headline_shimer.dart';
+import 'package:Mura/src/utils/news_card.dart';
 import 'package:Mura/src/utils/oval_right.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -164,7 +165,7 @@ class _HomeState extends State<Home> {
             ): Center(child: Text('artikel kosong'),) : CardShimmer(),
           ),
           Container(
-            height: 90.0,
+            height: 70.0,
             child: ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               scrollDirection: Axis.horizontal,
@@ -207,19 +208,28 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20.0),
-          ContentScroll(
-            images: myList,
-            title: 'My List',
-            imageHeight: 250.0,
-            imageWidth: 150.0,
+          Container(
+            height: MediaQuery.of(context).size.height / 2.5,
+                      child: NewsCard(
+              title: 'wkwk',
+              imageHeight: 100,
+              imageWidth: 200,
+              newsModel: newsModel,
+            ),
           ),
-          SizedBox(height: 10.0),
-          ContentScroll(
-            images: popular,
-            title: 'Popular',
-            imageHeight: 250.0,
-            imageWidth: 150.0,
-          ),
+          // ContentScroll(
+          //   images: myList,
+          //   title: 'My List',
+          //   imageHeight: 250.0,
+          //   imageWidth: 150.0,
+          // ),
+          // SizedBox(height: 10.0),
+          // ContentScroll(
+          //   images: popular,
+          //   title: 'Popular',
+          //   imageHeight: 250.0,
+          //   imageWidth: 150.0,
+          // ),
         ],
       ),
     );
