@@ -1,16 +1,14 @@
 # mura
 
-A new Flutter project.
+One App For Everything
 
-## Getting Started
+## Feature
 
-This project is a starting point for a Flutter application.
+1. Berita Indonesia (Top Headlines dan berita per kategori)
+2. Movie (Popular Movie, Upcoming Movie, etc) //soon
+3. Weather (check weather in your current location and cheack weather in search by city) //soon
+4. To do list //soon
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshot
+![alt text](https://i.ibb.co/jTdMhDk/Simulator-Screen-Shot-i-Phone-11-Pro-Max-2019-11-29-at-16-17-04.png)
